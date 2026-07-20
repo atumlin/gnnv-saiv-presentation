@@ -250,17 +250,16 @@
   {\centering\tiny\color{VUgrey!75} Gilmer et al., ICML 2017;\ \ Xu et al., ICLR 2019.\par}
 \end{frame}
 
-{\setbeamerfont{frametitle}{size=\footnotesize,series=\bfseries}
-\begin{frame}{Graph Convolutional Network (GCN) and Graph Isomorphism Network with Edge Features (GINE)}
-  \centering
-  {\small Same three stages as the previous slide:\ \
+\begin{frame}{Two Message-Passing Architectures: GCN and GINE}
+  {\centering\small Same three stages as the previous slide:\ \
    \textbf{message} $\to$
    \aggr{\textbf{aggregate}} $\to$ \comb{\textbf{combine}} (update).\par}
   \vskip-0.3ex
 
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.495\textwidth}
-      \begin{block}{GCN}
+  \par\smallskip\noindent\hspace*{-0.24cm}%
+  \begin{minipage}{\dimexpr\textwidth+0.48cm\relax}
+  \begin{minipage}[t]{\dimexpr0.5\textwidth+0.19cm\relax}
+      \begin{block}{\scriptsize Graph Convolutional Network (GCN)}
         \small
         \vspace{-3ex}
         \[
@@ -278,9 +277,9 @@
                 \textbf{node features only} ($E$ never enters)
         \end{itemize}
       \end{block}
-    \end{column}
-    \begin{column}{0.495\textwidth}
-      \begin{block}{GINE}
+    \end{minipage}\hfill
+  \begin{minipage}[t]{\dimexpr0.5\textwidth+0.19cm\relax}
+      \begin{block}{\scriptsize Graph Isomorphism Network with Edge Features (GINE)}
         \small
         \vspace{-3ex}
         \begin{align*}
@@ -298,15 +297,14 @@
           \item \textcolor{VUgoldDark}{\textbf{edge features enter every message}}
         \end{itemize}
       \end{block}
-    \end{column}
-  \end{columns}
+  \end{minipage}
+  \end{minipage}
   \vskip0.4ex
 
-  {\small Both share one shape: a \textbf{linear graph operation followed by
-  ReLU}; only GINE carries edge features.\par}
+  {\centering\small Both share one shape: a \textbf{linear graph operation
+  followed by ReLU}; only GINE carries edge features.\par}
   \refline{Kipf \& Welling, ICLR 2017;\ \ Hu et al., ICLR 2020.}
 \end{frame}
-}
 
 \begin{frame}{Verification Gap: No Support for Edge-Aware Architectures}
   {\small Message passing is what makes GNNs hard to verify: a perturbation on
