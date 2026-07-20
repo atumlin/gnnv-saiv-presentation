@@ -66,9 +66,9 @@
   \begin{tikzpicture}[remember picture, overlay]
     \fill[VUblack] (current page.north west) rectangle (current page.south east);
     \coordinate (L) at ([xshift=1.1cm]current page.west);
-    \node[anchor=west, inner sep=0pt, text width=0.84\paperwidth, align=left] (ttl) at ([yshift=0.45cm]L)
-      {\usebeamerfont{title}\color{white}\bfseries\LARGE\linespread{1.3}\selectfont \insertsectionhead\par};
-    \draw[VUgold, line width=1.6pt] ([yshift=-1.25cm]L) -- ([xshift=0.42\paperwidth, yshift=-1.25cm]L);
+    \node[anchor=west, inner sep=0pt, text width=0.84\paperwidth, align=left] (ttl) at ([yshift=0.3cm]L)
+      {\usebeamerfont{title}\color{white}\bfseries\LARGE\linespread{1.25}\selectfont \insertsectionhead\par};
+    \draw[VUgold, line width=1.6pt] ([yshift=-0.62cm]L) -- ([xshift=0.42\paperwidth, yshift=-0.62cm]L);
   \end{tikzpicture}%
 }
 % Emit our section page automatically at each \section
