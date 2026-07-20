@@ -68,7 +68,11 @@
     \coordinate (L) at ([xshift=1.1cm]current page.west);
     \node[anchor=west, inner sep=0pt, text width=0.84\paperwidth, align=left] (ttl) at ([yshift=0.3cm]L)
       {\usebeamerfont{title}\color{white}\bfseries\LARGE\linespread{1.25}\selectfont \insertsectionhead\par};
-    \draw[VUgold, line width=1.6pt] ([yshift=-0.62cm]L) -- ([xshift=0.42\paperwidth, yshift=-0.62cm]L);
+    \ifnum\value{section}=1\relax
+      \draw[VUgold, line width=1.6pt] ([yshift=-0.95cm]L) -- ([xshift=0.42\paperwidth, yshift=-0.95cm]L);
+    \else
+      \draw[VUgold, line width=1.6pt] ([yshift=-0.62cm]L) -- ([xshift=0.42\paperwidth, yshift=-0.62cm]L);
+    \fi
   \end{tikzpicture}%
 }
 % Emit our section page automatically at each \section
