@@ -487,14 +487,11 @@
 
 \begin{frame}{GraphStar Reachability: How a Layer Transforms the Set}
   \centering
-  A \textbf{linear map} $L$ hits the center \emph{and} every generator, so the
-  GraphStar structure is preserved \good{exactly}:
-  \vspace{-0.5ex}
-  \[
-    L\,\lb\langle C,\{B_i\},P\rangle\rb \;=\;
-    \lb\big\langle\, \aggr{LC},\ \{\comb{LB_i}\},\ P \,\big\rangle\rb .
-  \]
-  \vskip1.2ex
+  A \textbf{linear map} $L$ acts on a GraphStar by hitting the center
+  \emph{and} every generator: it sends $C \mapsto LC$ and each $B_i \mapsto
+  LB_i$ while leaving the predicate $P$ unchanged. The GraphStar structure is
+  therefore preserved \good{exactly}, so affine graph operations are lossless.
+  \vskip2ex
 
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.49\textwidth}
