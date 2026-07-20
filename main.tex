@@ -937,12 +937,24 @@
       \centering
       \begin{tikzpicture}[scale=0.9]
         \draw[VUgrey!40, thick, dashed] (0,0) circle (1.9);
-        \node[font=\tiny, text=VUgrey!70] at (0,-2.15) {full graph ($N{=}118$)};
         \draw[VUgold!55, very thick] (0,0) circle (1.05);
-        \foreach \a in {30,150,270} \node[circle,fill=steelblue!35,draw=VUgrey,minimum size=4mm,inner sep=0pt] at (\a:0.85) {};
-        \foreach \a in {90,210,330} \node[circle,fill=VUgrey!15,draw=VUgrey,minimum size=3.4mm,inner sep=0pt] at (\a:1.65) {};
-        \node[circle,fill=VUgold!55,draw=VUblack,thick,minimum size=5mm,inner sep=0pt,font=\scriptsize\bfseries] at (0,0) {$v$};
-        \node[font=\tiny, text=VUgoldDark] at (0,1.28) {$K$-hop};
+        % coordinates: v (target), u* (1-hop, inside K-hop), w* (beyond K-hop)
+        \coordinate (v) at (0,0);
+        \coordinate (u1) at (30:0.85); \coordinate (u2) at (150:0.85);
+        \coordinate (u3) at (270:0.85);
+        \coordinate (w1) at (85:1.62); \coordinate (w2) at (205:1.62);
+        \coordinate (w3) at (330:1.62);
+        % edges (behind the nodes)
+        \draw[VUgrey, thick] (v)--(u1) (v)--(u2) (v)--(u3) (u1)--(u2);
+        \draw[VUgrey!55, thick] (u1)--(w1) (u2)--(w2) (u3)--(w3) (w2)--(w3);
+        % nodes on top
+        \foreach \n in {u1,u2,u3}
+          \node[circle,fill=steelblue!35,draw=VUgrey,minimum size=4mm,inner sep=0pt] at (\n) {};
+        \foreach \n in {w1,w2,w3}
+          \node[circle,fill=VUgrey!15,draw=VUgrey,minimum size=3.4mm,inner sep=0pt] at (\n) {};
+        \node[circle,fill=VUgold!55,draw=VUblack,thick,minimum size=5mm,inner sep=0pt,font=\scriptsize\bfseries] at (v) {$v$};
+        \node[font=\tiny, text=VUgoldDark, fill=white, inner sep=0.6pt] at (-0.72,1.18) {$K$-hop};
+        \node[font=\tiny, text=VUgrey!70] at (0,-2.15) {full graph ($N{=}118$)};
       \end{tikzpicture}
     \end{column}
   \end{columns}
