@@ -153,7 +153,7 @@
       \visible<3->{%
       \begin{block}{Two Task Types}
         \small
-        \textbf{node-level:} regress $\hat y_v$;\ \
+        \textbf{node-level:} regress $\hat y_v$\\
         \textbf{graph-level:} classify $\mathcal{G}$
       \end{block}}
     \end{column}
@@ -218,19 +218,19 @@
     % ================= (e) vectors on the right =================
     \visible<2->{
       \node[font=\small, text=VUgrey, anchor=south] at (10.35,2.3) {\textbf{what node $v$ holds}};
-      \foreach \x/\lab in {8.4/$m_{u_1v}$, 9.1/$m_{u_2v}$, 9.8/$m_{u_3v}$}{
+      \foreach \x/\lab in {8.85/$m_{u_1v}$, 9.55/$m_{u_2v}$, 10.25/$m_{u_3v}$}{
         \foreach \i in {0,...,3} {\node[vec=VUgold!45] at (\x, 0.6+\i*0.24) {};}
         \node[font=\scriptsize, text=VUgrey, anchor=north] at (\x+0.09,0.5) {\lab};}
     }
     \visible<3->{
-      \node[font=\large, text=aggcol] at (10.45,1.0) {$\Rightarrow$};
-      \foreach \i in {0,...,3} {\node[vec=aggcol!45] at (11.0, 0.6+\i*0.24) {};}
-      \node[font=\scriptsize, text=VUgrey, anchor=north] at (11.09,0.5) {$z_v$};
+      \node[font=\large, text=aggcol] at (10.9,1.0) {$\Rightarrow$};
+      \foreach \i in {0,...,3} {\node[vec=aggcol!45] at (11.45, 0.6+\i*0.24) {};}
+      \node[font=\scriptsize, text=VUgrey, anchor=north] at (11.54,0.5) {$z_v$};
     }
     \visible<4->{
-      \node[font=\large, text=combcol] at (10.45,-1.15) {$\Downarrow$};
-      \foreach \i in {0,...,3} {\node[vec=combcol!40] at (11.0, -1.55+\i*0.24) {};}
-      \node[font=\scriptsize, text=VUgrey, anchor=north] at (11.14,-1.62) {$h_v^{(\ell+1)}$};
+      \node[font=\large, text=combcol] at (10.9,-1.15) {$\Downarrow$};
+      \foreach \i in {0,...,3} {\node[vec=combcol!40] at (11.45, -1.55+\i*0.24) {};}
+      \node[font=\scriptsize, text=VUgrey, anchor=north] at (11.59,-1.62) {$h_v^{(\ell+1)}$};
       \node[font=\small, text=VUgrey, anchor=east, text width=2.9cm, align=right] at (10.65,-1.15)
         {every node updates \textbf{in parallel}};
     }
@@ -259,7 +259,7 @@
   \vskip-0.3ex
 
   \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.49\textwidth}
+    \begin{column}{0.495\textwidth}
       \begin{block}{GCN}
         \small
         \vspace{-3ex}
@@ -279,7 +279,7 @@
         \end{itemize}
       \end{block}
     \end{column}
-    \begin{column}{0.49\textwidth}
+    \begin{column}{0.495\textwidth}
       \begin{block}{GINE}
         \small
         \vspace{-3ex}
@@ -521,13 +521,13 @@
 \begin{frame}{GNNV Reachability Pipeline}
   \centering
   \vfill
-  \includegraphics[width=0.88\linewidth]{figures/gnnv_pipeline_v4.pdf}
+  \includegraphics[width=0.91\linewidth]{figures/gnnv_pipeline_v4.pdf}
   \refline{Figure from our paper, Fig.~2.}
 \end{frame}
 
 \begin{frame}{Pipeline: GraphStar Construction to Specification Check}
   \centering
-  \includegraphics[width=0.63\linewidth]{figures/gnnv_pipeline_v4.pdf}
+  \includegraphics[width=0.64\linewidth]{figures/gnnv_pipeline_v4.pdf}
   \vskip1ex
 
   \begin{columns}[T,onlytextwidth]
