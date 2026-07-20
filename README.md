@@ -64,7 +64,8 @@ Terminology follows Gilmer et al. (cited): **Message -> Aggregate -> Update**
 (Update = the paper's COMBINE). Slide 4 walks these three stages on an irregular
 graph (neighbours `u1`-`u3` interconnected, plus `q`, `r`, `w` outside the 1-hop
 neighbourhood so it does not read as a feedforward layer); slide 5 shows the same
-three stages inside the GCN and GINE layer equations using the same colours. For
+three stages inside the GCN and GINE layer equations (the "message" stage word
+is left black on slide 5; aggregate/combine keep their colours). For
 GCN, the equation labels the normalised-adjacency term `aggregate` and the weight
 `W` `combine`, and a bullet notes that self-loops (A + I) fold in the node's own
 state.

@@ -89,7 +89,7 @@
   % message-passing slide
   vec/.style={draw=VUgrey!70, fill=#1, minimum width=3.6mm, minimum height=2.4mm,
               inner sep=0pt, anchor=south},
-  slbl/.style={font=\tiny, text=VUgrey},
+  slbl/.style={font=\fontsize{6.4}{7.6}\selectfont, text=VUgrey},
   stepbox/.style={rectangle, rounded corners=2pt, draw=VUgoldDark, fill=VUgold!16,
                   inner sep=3pt, font=\small},
 }
@@ -124,10 +124,10 @@
     {nodes: buses $(P,Q,|V|,\theta)$\\ edges: lines $(g,b)$}{PF, OPF, CFA [4]}
   \vskip1.2ex
 
-  \visible<2->{{\normalsize Different domains, \textbf{the same computation}:
-  message passing over node \textbf{and} edge features.\\[0.5ex]
-  \textcolor{VUgoldDark}{\textbf{These predictions carry real consequences, so
-  accuracy alone is not enough.}}}}
+  \visible<2->{{\small Different domains, one shared computation:
+  \textbf{message passing over node and edge features}.\\[0.4ex]
+  \textcolor{VUgoldDark}{\textbf{These predictions drive high-stakes decisions,
+  so we need guarantees, not just accuracy.}}}}
 
   \refline{[1]~Gilmer et al., ICML 2017.\ \ [2]~Morris et al., TUDataset (ICML-W 2020).\ \
            [3]~Jiang \& Luo, ESWA 2022.\ \ [4]~Varbella et al., NeurIPS 2024.\ \
@@ -185,7 +185,7 @@
     \draw[gedge] (u1)--(u2);
     \draw[gedge] (w)--(u1); \draw[gedge] (w)--(q); \draw[gedge] (q)--(u2);
     \draw[gedge] (r)--(u3);
-    \node[font=\tiny, text=VUgrey!80, anchor=north, align=center] at (-1.3,-0.95)
+    \node[font=\scriptsize, text=VUgrey!80, anchor=north, align=center] at (-1.3,-1.0)
       {$q$, $r$, $w$: outside\\ $v$'s 1-hop neighbourhood};
 
     % ================= (b) gather =================
@@ -193,13 +193,12 @@
       \draw[-{Stealth[length=2.4mm]}, very thick, VUgoldDark] (u1)--(v);
       \draw[-{Stealth[length=2.4mm]}, very thick, VUgoldDark] (u2)--(v);
       \draw[-{Stealth[length=2.4mm]}, very thick, VUgoldDark] (u3)--(v);
-      \node[font=\tiny, text=VUgoldDark, anchor=south west] at (1.0,0.85) {$e_{u_1v}$};
+      \node[font=\scriptsize, text=VUgoldDark, anchor=south west] at (1.0,0.9) {$e_{u_1 v}$};
       \node[stepbox, anchor=west] at (3.4,1.6)
         {$m_{uv} = \phi\big(h_u^{(\ell)},\, \textcolor{VUgoldDark}{e_{uv}}\big)$};
       \node[slbl, anchor=north west, text width=3.4cm] at (3.4,1.1)
-        {\textcolor{VUgoldDark}{\textbf{1. Message:}} each neighbour $u$ sends
-         its features, mixed with the \textcolor{VUgoldDark}{edge feature}
-         $e_{uv}$.};
+        {\textcolor{VUgoldDark}{\textbf{1. Message:}} each neighbour sends its
+         features, mixed with \textcolor{VUgoldDark}{edge feature} $e_{uv}$.};
     }
     % ================= (c) aggregate =================
     \visible<3->{
@@ -214,8 +213,8 @@
       \node[stepbox, anchor=west, draw=combcol, fill=combcol!12] at (3.4,-2.2)
         {$\comb{h_v^{(\ell+1)} = \sigma\big(W z_v + b\big)}$};
       \node[slbl, anchor=north west, text width=3.4cm] at (3.4,-2.7)
-        {\textbf{\comb{3. Update}} (a.k.a.\ combine): learned linear map,
-         then ReLU.};
+        {\textbf{\comb{3. Update}} (a.k.a.\ combine): a learned map, then
+         ReLU.};
     }
 
     % ================= (e) vectors on the right =================
@@ -223,17 +222,17 @@
       \node[slbl, anchor=south] at (9.9,2.3) {\textbf{what node $v$ holds}};
       \foreach \x/\lab in {8.4/$m_{u_1v}$, 9.1/$m_{u_2v}$, 9.8/$m_{u_3v}$}{
         \foreach \i in {0,...,3} {\node[vec=VUgold!45] at (\x, 0.6+\i*0.24) {};}
-        \node[font=\tiny, text=VUgrey, anchor=north] at (\x+0.09,0.55) {\lab};}
+        \node[font=\scriptsize, text=VUgrey, anchor=north] at (\x+0.09,0.5) {\lab};}
     }
     \visible<3->{
       \node[font=\large, text=aggcol] at (10.45,1.0) {$\Rightarrow$};
       \foreach \i in {0,...,3} {\node[vec=aggcol!45] at (11.0, 0.6+\i*0.24) {};}
-      \node[font=\tiny, text=VUgrey, anchor=north] at (11.09,0.55) {$z_v$};
+      \node[font=\scriptsize, text=VUgrey, anchor=north] at (11.09,0.5) {$z_v$};
     }
     \visible<4->{
       \node[font=\large, text=combcol] at (10.45,-1.15) {$\Downarrow$};
       \foreach \i in {0,...,3} {\node[vec=combcol!40] at (11.0, -1.55+\i*0.24) {};}
-      \node[font=\tiny, text=VUgrey, anchor=north] at (11.14,-1.6) {$h_v^{(\ell+1)}$};
+      \node[font=\scriptsize, text=VUgrey, anchor=north] at (11.14,-1.62) {$h_v^{(\ell+1)}$};
       \node[slbl, anchor=east, text width=2.5cm, align=right] at (10.2,-1.15)
         {every node updates \textbf{in parallel}};
     }
@@ -241,7 +240,8 @@
     \visible<5->{
       \draw[-{Stealth[length=2.4mm]}, very thick, unsafered, dashed] (w)--(u1);
       \draw[-{Stealth[length=2.4mm]}, very thick, unsafered, dashed] (q)--(u2);
-      \node[font=\tiny, text=unsafered, anchor=east] at (-1.85,1.35) {layer 2};
+      \draw[-{Stealth[length=2.4mm]}, very thick, unsafered, dashed] (r)--(u3);
+      \node[font=\scriptsize, text=unsafered, anchor=east] at (-1.9,1.35) {layer 2};
     }
   \end{tikzpicture}
 
@@ -255,13 +255,13 @@
 \begin{frame}{Graph Convolutional Network (GCN) and Graph Isomorphism Network with Edge Features (GINE)}
   \centering
   {\small Same three stages as the previous slide:\ \
-   \textcolor{VUgoldDark}{\textbf{message}} $\to$
+   \textbf{message} $\to$
    \aggr{\textbf{aggregate}} $\to$ \comb{\textbf{combine}} (update).\par}
   \vskip-0.3ex
 
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.49\textwidth}
-      \begin{block}{GCN [Kipf \& Welling, ICLR 2017]}
+      \begin{block}{GCN}
         \small
         \vspace{-3ex}
         \[
@@ -281,7 +281,7 @@
       \end{block}
     \end{column}
     \begin{column}{0.49\textwidth}
-      \begin{block}{GINE [Hu et al., ICLR 2020]}
+      \begin{block}{GINE}
         \small
         \vspace{-3ex}
         \begin{align*}
