@@ -1,0 +1,167 @@
+% beamerthemeVanderbilt.sty  —  v2
+% A reusable Vanderbilt-branded Beamer theme built on top of Metropolis.
+% Requires: pdfLaTeX (or LuaLaTeX/XeLaTeX), beamertheme-metropolis.
+% Usage:  \usetheme{Vanderbilt}   \institutelogo{...png}
+%
+% Palette (Vanderbilt brand): Gold PMS 4515 #CFAE70, Black #000000.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeVanderbilt}[2026/06/25 v2.0 Vanderbilt Metropolis theme]
+
+\RequirePackage{etoolbox}
+\usetheme[sectionpage=none, numbering=fraction]{metropolis}
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+
+% ---------------------------------------------------------------------------
+% Palette
+% ---------------------------------------------------------------------------
+\definecolor{VUgold}{HTML}{CFAE70}
+\definecolor{VUgoldDark}{HTML}{9E7E3F}
+\definecolor{VUblack}{HTML}{1A1A1A}
+\definecolor{VUgrey}{HTML}{3F3F3F}
+\definecolor{VUlight}{HTML}{F3EEE3}
+
+% Comfortable, consistent body margins (banner aligns to these)
+\newlength{\vumargin}\setlength{\vumargin}{3.2ex}
+\setbeamersize{text margin left=\vumargin, text margin right=\vumargin}
+
+% ---------------------------------------------------------------------------
+% Base colors
+% ---------------------------------------------------------------------------
+\setbeamercolor{normal text}{fg=VUgrey, bg=white}
+\setbeamercolor{alerted text}{fg=VUgoldDark}
+\setbeamercolor{example text}{fg=VUblack}
+\setbeamercolor{title}{fg=VUblack}
+\setbeamercolor{subtitle}{fg=VUgoldDark}
+\setbeamercolor{author}{fg=VUgrey}
+\setbeamercolor{date}{fg=VUgrey}
+\setbeamercolor{institute}{fg=VUgrey}
+\setbeamercolor{itemize item}{fg=VUgoldDark}
+\setbeamercolor{itemize subitem}{fg=VUgold}
+\setbeamercolor{enumerate item}{fg=VUgoldDark}
+
+% ---------------------------------------------------------------------------
+% Frame title  =  full-bleed black banner + gold underline
+% ---------------------------------------------------------------------------
+\setbeamercolor{frametitle}{fg=white, bg=VUblack}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+% ht/dp give the banner real padding above/below the title baseline;
+% a \vspace inside the box lands below the line and lets ascenders clip
+% at the page edge.
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip%
+  \begin{beamercolorbox}[wd=\paperwidth, ht=3.6ex, dp=1.6ex, leftskip=\vumargin, rightskip=\vumargin]{frametitle}%
+    \usebeamerfont{frametitle}\insertframetitle%
+  \end{beamercolorbox}%
+  \nointerlineskip%
+  \hspace*{-\vumargin}{\color{VUgold}\rule{\paperwidth}{1.6pt}}\par\vspace{1.2ex}%
+}
+
+% ---------------------------------------------------------------------------
+% Section page  =  full-black banner matching the header
+% ---------------------------------------------------------------------------
+\setbeamertemplate{section page}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[VUblack] (current page.north west) rectangle (current page.south east);
+    \coordinate (L) at ([xshift=1.1cm]current page.west);
+    \node[anchor=west, inner sep=0pt, text width=0.84\paperwidth, align=left] (ttl) at ([yshift=0.45cm]L)
+      {\usebeamerfont{title}\color{white}\bfseries\LARGE\linespread{1.3}\selectfont \insertsectionhead\par};
+    \draw[VUgold, line width=1.6pt] ([yshift=-1.25cm]L) -- ([xshift=0.42\paperwidth, yshift=-1.25cm]L);
+  \end{tikzpicture}%
+}
+% Emit our section page automatically at each \section
+\AtBeginSection[]{%
+  \begin{frame}[plain,noframenumbering]\sectionpage\end{frame}%
+}
+
+% ---------------------------------------------------------------------------
+% Blocks  =  padded, with breathing room
+% ---------------------------------------------------------------------------
+\setbeamercolor{block title}{fg=white, bg=VUblack}
+\setbeamercolor{block body}{fg=VUgrey, bg=VUlight}
+\setbeamercolor{block title alerted}{fg=VUblack, bg=VUgold}
+\setbeamercolor{block body alerted}{fg=VUgrey, bg=VUlight}
+\setbeamercolor{block title example}{fg=white, bg=VUgoldDark}
+\setbeamercolor{block body example}{fg=VUgrey, bg=VUlight}
+\setbeamerfont{block title}{series=\bfseries}
+
+\setbeamertemplate{block begin}{%
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[leftskip=1.3ex, rightskip=1.3ex, sep=0.7ex]{block title}%
+    \usebeamerfont*{block title}\insertblocktitle%
+  \end{beamercolorbox}%
+  \nointerlineskip%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[leftskip=1.3ex, rightskip=1.3ex, sep=1.1ex]{block body}%
+}
+\setbeamertemplate{block end}{\end{beamercolorbox}\vskip\medskipamount}
+
+\setbeamertemplate{block alerted begin}{%
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[leftskip=1.3ex, rightskip=1.3ex, sep=0.7ex]{block title alerted}%
+    \usebeamerfont*{block title}\insertblocktitle%
+  \end{beamercolorbox}%
+  \nointerlineskip\usebeamerfont{block body}%
+  \begin{beamercolorbox}[leftskip=1.3ex, rightskip=1.3ex, sep=1.1ex]{block body alerted}%
+}
+\setbeamertemplate{block alerted end}{\end{beamercolorbox}\vskip\medskipamount}
+
+\setbeamertemplate{block example begin}{%
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[leftskip=1.3ex, rightskip=1.3ex, sep=0.7ex]{block title example}%
+    \usebeamerfont*{block title}\insertblocktitle%
+  \end{beamercolorbox}%
+  \nointerlineskip\usebeamerfont{block body}%
+  \begin{beamercolorbox}[leftskip=1.3ex, rightskip=1.3ex, sep=1.1ex]{block body example}%
+}
+\setbeamertemplate{block example end}{\end{beamercolorbox}\vskip\medskipamount}
+
+% ---------------------------------------------------------------------------
+% Institute logo plumbing
+% ---------------------------------------------------------------------------
+\newcommand{\insertinstitutelogo}{}
+\newcommand{\institutelogo}[1]{\renewcommand{\insertinstitutelogo}{#1}}
+
+\setbeamertemplate{title page}{%
+  \begin{minipage}[b][\paperheight]{\textwidth}
+    \ifx\insertinstitutelogo\empty\else
+      \vspace*{0.11\paperheight}\hfill\includegraphics[height=1.15cm]{\insertinstitutelogo}\par\vspace{2ex}
+    \fi
+    \vfill%
+    \ifx\inserttitle\empty\else\usebeamertemplate*{title}\fi
+    \ifx\insertsubtitle\empty\else\usebeamertemplate*{subtitle}\fi
+    \usebeamertemplate*{title separator}
+    \ifx\beamer@shortauthor\empty\else\usebeamertemplate*{author}\fi
+    \ifx\insertdate\empty\else\usebeamertemplate*{date}\fi
+    \ifx\insertinstitute\empty\else\usebeamertemplate*{institute}\fi
+    \vfill\vspace*{3mm}
+  \end{minipage}
+}
+\setbeamertemplate{title separator}{%
+  {\color{VUgold}\rule{\textwidth}{1pt}}\par\vskip1.2ex%
+}
+
+% ---------------------------------------------------------------------------
+% Footline  =  thin strip, gold hairline on top, flush to bottom
+% ---------------------------------------------------------------------------
+\setbeamercolor{footline}{fg=VUgrey, bg=VUlight}
+\setbeamerfont{footline}{size=\scriptsize}
+\setbeamertemplate{footline}{%
+  \vbox{%
+    {\color{VUgold}\hrule height 0.8pt}%
+    \begin{beamercolorbox}[wd=\paperwidth, ht=2.6ex, dp=1.1ex,
+          leftskip=\vumargin, rightskip=\vumargin]{footline}%
+      \usebeamerfont{footline}%
+      \insertshortauthor\hfill
+      \insertshorttitle\hfill
+      \ifx\insertinstitutelogo\empty\else
+        \raisebox{-0.25ex}{\includegraphics[height=1.5ex]{\insertinstitutelogo}}\hspace{0.8ex}%
+      \fi
+      \insertframenumber\,/\,\inserttotalframenumber%
+    \end{beamercolorbox}%
+  }%
+}
+
+\mode<all>

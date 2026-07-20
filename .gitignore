@@ -1,0 +1,20 @@
+# LaTeX build artifacts
+*.aux
+*.log
+*.nav
+*.snm
+*.toc
+*.out
+*.vrb
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+
+# keep main.pdf tracked (it's the deliverable); ignore other stray PDFs
+# (nothing else to ignore)
+
+# OS cruft
+.DS_Store
+_unused_src/
