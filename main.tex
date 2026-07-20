@@ -160,7 +160,7 @@
     \begin{column}{0.52\textwidth}
       \centering
       \includegraphics[width=0.92\linewidth]{figures/gnn_construction_v5.pdf}\\[0.3ex]
-      {\scriptsize A power grid mapped to a graph. Any domain maps the same
+      {\scriptsize A power grid mapped to a graph. Any domain maps in a similar
       way.\ \ {\color{VUgrey!75}[our paper, Fig.~1]}}
     \end{column}
   \end{columns}
@@ -170,7 +170,7 @@
   \centering
   \begin{tikzpicture}[scale=0.9, transform shape]
     % ================= (a) an irregular graph =================
-    \node[font=\small, text=VUgrey, anchor=south] at (0.1,2.35) {\textbf{target node $v$ in its neighbourhood}};
+    \node[font=\small, text=VUgrey, anchor=south] at (-0.25,2.35) {\textbf{target node $v$ in its neighbourhood}};
     % neighbours of v, scattered at uneven angles/distances
     \node[gnode, fill=aggcol!30, minimum size=6mm] (u1) at (0.15,1.35) {$u_1$};
     \node[gnode, fill=aggcol!30, minimum size=6mm] (u2) at (-0.35,-0.25) {$u_2$};
@@ -217,7 +217,7 @@
 
     % ================= (e) vectors on the right =================
     \visible<2->{
-      \node[font=\small, text=VUgrey, anchor=south] at (10.15,2.35) {\textbf{what node $v$ holds}};
+      \node[font=\small, text=VUgrey, anchor=south] at (9.8,2.35) {\textbf{what node $v$ holds}};
       \foreach \x/\lab in {8.85/$m_{u_1v}$, 9.55/$m_{u_2v}$, 10.25/$m_{u_3v}$}{
         \foreach \i in {0,...,3} {\node[vec=VUgold!45] at (\x, 0.6+\i*0.24) {};}
         \node[font=\scriptsize, text=VUgrey, anchor=north] at (\x+0.09,0.5) {\lab};}
@@ -256,12 +256,11 @@
    \aggr{\textbf{aggregate}} $\to$ \comb{\textbf{combine}} (update).\par}
   \vskip-0.3ex
 
-  \par\smallskip\noindent\hspace*{-0.24cm}%
-  \begin{minipage}{\dimexpr\textwidth+0.48cm\relax}
-  \begin{minipage}[t]{\dimexpr0.5\textwidth+0.19cm\relax}
-      \begin{block}{\scriptsize Graph Convolutional Network (GCN)}
-        \small
-        \vspace{-3ex}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \begin{block}{\scriptsize Graph Convolutional Network}
+        \footnotesize
+        \vspace{0.4ex}
         \[
           H^{(\ell+1)} = \sigma\big(
           \underbrace{\aggr{\tilde D^{-\frac12}\tilde A \tilde D^{-\frac12}
@@ -277,11 +276,11 @@
                 \textbf{node features only} ($E$ never enters)
         \end{itemize}
       \end{block}
-    \end{minipage}\hfill
-  \begin{minipage}[t]{\dimexpr0.5\textwidth+0.19cm\relax}
-      \begin{block}{\scriptsize Graph Isomorphism Network with Edge Features (GINE)}
-        \small
-        \vspace{-3ex}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \begin{block}{\scriptsize Graph Isomorphism Network with Edge Features}
+        \footnotesize
+        \vspace{0ex}
         \begin{align*}
           \aggr{Z^{(\ell)}} &= \aggr{R^\top\big(S H^{(\ell)} +
              \textcolor{VUgoldDark}{E\,W_e^{(\ell)}} + b_e^{(\ell)}\big)}
@@ -297,8 +296,8 @@
           \item \textcolor{VUgoldDark}{\textbf{edge features enter every message}}
         \end{itemize}
       \end{block}
-  \end{minipage}
-  \end{minipage}
+    \end{column}
+  \end{columns}
   \vskip0.4ex
 
   {\centering\small Both share one shape: a \textbf{linear graph operation
