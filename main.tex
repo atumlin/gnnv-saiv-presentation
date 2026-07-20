@@ -170,7 +170,7 @@
   \centering
   \begin{tikzpicture}[scale=0.9, transform shape]
     % ================= (a) an irregular graph =================
-    \node[font=\small, text=VUgrey, anchor=south] at (1.4,2.25) {\textbf{target node $v$ in its neighbourhood}};
+    \node[font=\small, text=VUgrey, anchor=south] at (0.1,2.35) {\textbf{target node $v$ in its neighbourhood}};
     % neighbours of v, scattered at uneven angles/distances
     \node[gnode, fill=aggcol!30, minimum size=6mm] (u1) at (0.15,1.35) {$u_1$};
     \node[gnode, fill=aggcol!30, minimum size=6mm] (u2) at (-0.35,-0.25) {$u_2$};
@@ -217,7 +217,7 @@
 
     % ================= (e) vectors on the right =================
     \visible<2->{
-      \node[font=\small, text=VUgrey, anchor=south] at (10.35,2.3) {\textbf{what node $v$ holds}};
+      \node[font=\small, text=VUgrey, anchor=south] at (10.15,2.35) {\textbf{what node $v$ holds}};
       \foreach \x/\lab in {8.85/$m_{u_1v}$, 9.55/$m_{u_2v}$, 10.25/$m_{u_3v}$}{
         \foreach \i in {0,...,3} {\node[vec=VUgold!45] at (\x, 0.6+\i*0.24) {};}
         \node[font=\scriptsize, text=VUgrey, anchor=north] at (\x+0.09,0.5) {\lab};}
