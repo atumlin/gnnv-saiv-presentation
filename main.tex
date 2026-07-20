@@ -319,7 +319,7 @@
     \textbf{Tool} & \textbf{GCN} & \textbf{GINE} & \textbf{node} $\epsilon$ & \textbf{edge} $\epsilon$\\
     \midrule
     CORA (TMLR 2025)      & \good{\checkmark} & \bad{$\times$} & \good{\checkmark} & \bad{$\times$}\\
-    MILP-exact (ICML 2024) & GraphSAGE only   & \bad{$\times$} & \good{\checkmark} & \bad{$\times$}\\
+    H\"ojny MILP (ICML 2024) & \good{\checkmark} & \bad{$\times$} & \good{\checkmark} & \bad{$\times$}\\
     \key{GNNV (this work)} & \good{\checkmark} & \good{\checkmark} & \good{\checkmark} & \good{\checkmark}\\
     \bottomrule
   \end{tabular}}
@@ -605,7 +605,7 @@
       \centering
       \includegraphics[width=0.98\linewidth]{figures/rq1_pf_robustness_stacked.pdf}\\[0.2ex]
       {\scriptsize PF robustness vs.\ $\epsilon$, IEEE-24/-39/-118
-       (\textcolor{safegreen}{safe}/\textcolor{unsafered}{unsafe}/%
+       (\textcolor{safegreen}{verified}/\textcolor{unsafered}{violated}/%
         \textcolor{amber}{unknown}); 100 graphs/level.}\\[0.8ex]
       {\scriptsize\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.1}
       \begin{tabular}{lcccc}
