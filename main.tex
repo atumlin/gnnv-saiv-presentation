@@ -483,11 +483,9 @@
 
 \begin{frame}{GraphStar Reachability: How a Layer Transforms the Set}
   \centering
-  A \textbf{linear map} $L$ acts on a GraphStar by updating the center
-  \emph{and} every generator: it sends $C \mapsto LC$ and each $B_i \mapsto
-  LB_i$ while leaving the predicate $P$ unchanged. The GraphStar structure is
-  therefore preserved \good{exactly}, so affine graph operations are lossless.
-  \vskip2ex
+  A linear map transforms a GraphStar's center and every generator, so the
+  structure is preserved \good{exactly}; every affine graph operation is lossless.
+  \vskip1.2ex
 
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.49\textwidth}
@@ -504,10 +502,11 @@
     \begin{column}{0.49\textwidth}
       \begin{block}{GINE reachability (node $+$ edge)}
         \footnotesize
-        \begin{itemize}\setlength{\itemsep}{0.35ex}\setlength{\topsep}{0pt}
-          \item fuse both sets: $S\,\lb\Theta_X\rb \oplus \lb\Theta_E\rb\,W_e$
-          \item generators \textbf{concatenate} ($m{+}r$)
-          \item scatter $R^\top$ exact; MLP ReLU $\to$ \key{approx-star}
+        \begin{itemize}\setlength{\itemsep}{0.5ex}\setlength{\topsep}{0pt}
+          \item \textbf{Minkowski sum} fuses node $+$ edge:
+                $S\,\lb\Theta_X\rb \oplus \lb\Theta_E\rb\,W_e$
+          \item exact for star sets $\Rightarrow$ exact for \textbf{GraphStars};
+                MLP ReLU $\to$ \key{approx-star}
         \end{itemize}
       \end{block}
     \end{column}
