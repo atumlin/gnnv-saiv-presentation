@@ -481,38 +481,6 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{GraphStar Reachability: How a Layer Transforms the Set}
-  \centering
-  A linear map transforms a GraphStar's center and every generator, so the
-  structure is preserved \good{exactly}; every affine graph operation is lossless.
-  \vskip1.2ex
-
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.49\textwidth}
-      \begin{block}{GCN reachability (node-only)}
-        \footnotesize
-        \begin{itemize}\setlength{\itemsep}{0.35ex}\setlength{\topsep}{0pt}
-          \item propagate $\Theta_X$ through
-                $\tilde D^{-\frac12}\tilde A\tilde D^{-\frac12}H^{(\ell)}W^{(\ell)}$
-          \item $C_X$ and every $B_i$ update \good{exactly}
-          \item ReLU $\to$ \key{approx-star}
-        \end{itemize}
-      \end{block}
-    \end{column}
-    \begin{column}{0.49\textwidth}
-      \begin{block}{GINE reachability (node $+$ edge)}
-        \footnotesize
-        \begin{itemize}\setlength{\itemsep}{0.5ex}\setlength{\topsep}{0pt}
-          \item \textbf{Minkowski sum} fuses node $+$ edge:
-                $S\,\lb\Theta_X\rb \oplus \lb\Theta_E\rb\,W_e$
-          \item exact for star sets $\Rightarrow$ exact for \textbf{GraphStars};
-                MLP ReLU $\to$ \key{approx-star}
-        \end{itemize}
-      \end{block}
-    \end{column}
-  \end{columns}
-  \takeaway{Only ReLU is over-approximated; soundness follows for GCN and GINE.}
-\end{frame}
 
 \begin{frame}{GNNV Reachability Pipeline}
   \centering
@@ -806,6 +774,116 @@
       \end{tabular}
     };
   \end{tikzpicture}
+\end{frame}
+
+
+% ===========================================================================
+% BACKUP / EXTRA SLIDES
+% ===========================================================================
+\appendix
+
+\begin{frame}[plain,noframenumbering]
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[VUblack] (current page.north west) rectangle (current page.south east);
+    \coordinate (L) at ([xshift=1.1cm]current page.west);
+    \node[anchor=west, inner sep=0pt, text width=0.84\paperwidth, align=left] at ([yshift=0.3cm]L)
+      {\usebeamerfont{title}\color{white}\bfseries\LARGE Backup Slides};
+    \draw[VUgold, line width=1.6pt] ([yshift=-0.62cm]L) -- ([xshift=0.42\paperwidth, yshift=-0.62cm]L);
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}[noframenumbering]{GraphStar Reachability: How a Layer Transforms the Set}
+  \centering
+  A linear map transforms a GraphStar's center and every generator, so the
+  structure is preserved \good{exactly}; every affine graph operation is lossless.
+  \vskip1.2ex
+
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \begin{block}{GCN reachability (node-only)}
+        \footnotesize
+        \begin{itemize}\setlength{\itemsep}{0.35ex}\setlength{\topsep}{0pt}
+          \item propagate $\Theta_X$ through
+                $\tilde D^{-\frac12}\tilde A\tilde D^{-\frac12}H^{(\ell)}W^{(\ell)}$
+          \item $C_X$ and every $B_i$ update \good{exactly}
+          \item ReLU $\to$ \key{approx-star}
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \begin{block}{GINE reachability (node $+$ edge)}
+        \footnotesize
+        \begin{itemize}\setlength{\itemsep}{0.5ex}\setlength{\topsep}{0pt}
+          \item \textbf{Minkowski sum} fuses node $+$ edge:
+                $S\,\lb\Theta_X\rb \oplus \lb\Theta_E\rb\,W_e$
+          \item exact for star sets $\Rightarrow$ exact for \textbf{GraphStars};
+                MLP ReLU $\to$ \key{approx-star}
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+  \takeaway{Only ReLU is over-approximated; soundness follows for GCN and GINE.}
+\end{frame}
+
+\begin{frame}[noframenumbering]{The Verified Models Are Accurate}
+  \centering
+  {\small Test MSE ($\times10^{-3}$) for PF and OPF across architectures and grid sizes.\par}
+  \vskip0.8ex
+  {\scriptsize\setlength{\tabcolsep}{10pt}\renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{llccc}
+    \toprule
+    Task & Architecture & IEEE-24 & IEEE-39 & IEEE-118\\
+    \midrule
+    PF  & GCN              & 51.9 & 48.8 & 46.2\\
+        & GraphSAGE        & 22.7 & 22.6 & 12.9\\
+        & GINE-Linear      & 1.92 & 2.91 & 5.36\\
+        & \textbf{GINEConv} & \good{0.86} & \good{1.01} & \good{2.20}\\
+    \midrule
+    OPF & GCN              & 32.6 & 34.9 & 19.2\\
+        & GraphSAGE        & 20.1 & 29.3 & 13.4\\
+        & GINE-Linear      & 1.63 & 3.16 & 9.52\\
+        & \textbf{GINEConv} & \good{0.69} & \good{0.99} & \good{2.29}\\
+    \bottomrule
+  \end{tabular}}
+  \vskip1ex
+  {\small The edge-aware \textbf{GINEConv} models we verify are also \good{by far the
+  most accurate} (25--60$\times$ lower MSE than GCN).\par}
+\end{frame}
+
+\begin{frame}[noframenumbering]{relax-star: Precision--Speed Trade-off}
+  \centering
+  {\small Resolving a fraction $\rho$ of uncertain ReLUs with cheap interval bounds instead of LPs.
+  Verified count and per-graph time (s/g).\par}
+  \vskip1.2ex
+  {\footnotesize\setlength{\tabcolsep}{7pt}\renewcommand{\arraystretch}{1.25}
+  \begin{tabular}{ll cc cc cc}
+    \toprule
+    & & \multicolumn{2}{c}{\textbf{approx-star}} & \multicolumn{2}{c}{$\rho{=}0.8$} & \multicolumn{2}{c}{$\rho{=}0.9$}\\
+    \cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}
+    Dataset & $\epsilon$ & ver. & s/g & ver. & s/g & ver. & s/g\\
+    \midrule
+    ENZYMES     & .005 & \good{45/81}   & 8.00 & 44/81   & 1.79 & 44/81   & 0.99\\
+    PROTEINS    & .010 & \good{152/167} & 3.98 & 151/167 & 0.90 & 151/167 & 0.49\\
+    IEEE-24 CFA & .005 & \good{99/100}  & 0.36 & 99/100  & 0.08 & 99/100  & 0.04\\
+    \bottomrule
+  \end{tabular}}
+  \vskip1.4ex
+  {\small $\rho{=}0.9$ keeps nearly all verified graphs at \good{up to $\sim$9$\times$} speedup,
+  retaining most of GNNV's advantage over CORA.\par}
+\end{frame}
+
+\begin{frame}[noframenumbering]{Soundness, Completeness, and Scope}
+  \begin{itemize}\itemsep=1.3ex
+    \item \textbf{Sound, not complete.} approx-star over-approximates ReLU, so GNNV
+          \good{never misses a real violation}, but may return
+          \textcolor{amber}{\textbf{unknown}} instead of a definitive safe/unsafe.
+    \item \textbf{Guarantees are w.r.t.\ the trained model} and hold for \emph{all}
+          perturbations inside the $\ell_\infty$ ball, not a finite sample.
+    \item \textbf{Perturbations:} node and edge \emph{feature} perturbations ($\ell_\infty$).
+          Structural perturbations (edge insertion/deletion) are future work.
+    \item \textbf{Complexity:} worst-case exponential in the ReLU count; kept tractable
+          by \key{$K$-hop} locality and \key{relax-star}.
+  \end{itemize}
 \end{frame}
 
 \end{document}

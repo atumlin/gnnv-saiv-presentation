@@ -34,19 +34,25 @@ so it does not collide with that slide's takeaway strip.
 | — | *Approach: Lifting Star-Set Reachability from Vectors to Graph-Structured Inputs* | |
 | 8 | Background: Star-Set Reachability and Approx-Star in NNV | 0:55 |
 | 9 | GraphStar Sets: Star Sets over Node and Edge Feature Matrices (definition + notation) | 0:55 |
-| 10 | GraphStar Reachability: How a Layer Transforms the Set (GCN + GINE reachability, Minkowski sum) | 0:55 |
-| 11 | GNNV Reachability Pipeline (full-size figure) | 0:30 |
-| 12 | Pipeline: GraphStar Construction to Specification Check (4 steps) | 0:50 |
-| 13 | Soundness and Computational Complexity | 0:45 |
+| 10 | GNNV Reachability Pipeline (full-size figure) | 0:30 |
+| 11 | Pipeline: GraphStar Construction to Specification Check (4 steps) | 0:50 |
+| 12 | Soundness and Computational Complexity | 0:45 |
 | — | *Experimental Evaluation* | |
-| 14 | Experimental Setup: Benchmarks, Models, Specifications | 0:35 |
-| 15 | RQ1: Verified Robustness vs. Perturbation Magnitude | 0:45 |
-| 16 | RQ2: Joint Node and Edge Perturbations | 0:40 |
-| 17 | RQ3: Enclosure Tightness vs. Polynomial Zonotopes | 0:50 |
+| 13 | Experimental Setup: Benchmarks, Models, Specifications | 0:35 |
+| 14 | RQ1: Verified Robustness vs. Perturbation Magnitude | 0:45 |
+| 15 | RQ2: Joint Node and Edge Perturbations | 0:40 |
+| 16 | RQ3: Enclosure Tightness vs. Polynomial Zonotopes | 0:50 |
 | — | *Conclusions and Tool Availability* | |
-| 18 | Conclusions and Future Work | 0:40 |
-| 19 | Tool Availability: GNNV in NNV3 (MATLAB) | 0:40 |
-| 20 | Thank You (dark page, single centred stack: contact, paper, QR) | 0:15 |
+| 17 | Conclusions and Future Work | 0:40 |
+| 18 | Tool Availability: GNNV in NNV3 (MATLAB) | 0:40 |
+| 19 | Thank You (dark page, single centred stack: contact, paper, QR) | 0:15 |
+
+## Backup slides (after `\appendix`, not numbered in the main count)
+
+1. GraphStar Reachability: How a Layer Transforms the Set (moved out of the main flow)
+2. The Verified Models Are Accurate (Test MSE; GINEConv beats GCN/SAGE 25-60x)
+3. relax-star: Precision-Speed Trade-off (approx-star vs rho=0.8/0.9)
+4. Soundness, Completeness, and Scope (sound-not-complete; feature vs structural perturbations)
 
 GCN and GINE are introduced in the background (slide 5) so the gap slide and the
 contributions can refer to GINE by name. The pipeline's stepped version starts
