@@ -53,6 +53,11 @@ so it does not collide with that slide's takeaway strip.
 2. The Verified Models Are Accurate (Test MSE; GINEConv beats GCN/SAGE 25-60x)
 3. relax-star: Precision-Speed Trade-off (approx-star vs rho=0.8/0.9)
 4. Soundness, Completeness, and Scope (sound-not-complete; feature vs structural perturbations)
+5. Why GraphStar Is Tighter Than CORA (and Slower per Graph) (poly-zonotope vs LP mechanism)
+6. Why K-hop Subgraph Verification Is Sound (locality + 15-35/118 nodes, with diagram)
+7. Where GNNV Sits Among GNN Verifiers (CORA / Hojny-MILP / Liu / Wu comparison table)
+8. The Robustness Cliff (IEEE-24 PF) (verified% falls 82.7 -> 0 between eps 0.02 and 0.05)
+9. Training and Verification Setup (PyG -> NNV, architectures, seeds, LP/approx-star)
 
 GCN and GINE are introduced in the background (slide 5) so the gap slide and the
 contributions can refer to GINE by name. The pipeline's stepped version starts
