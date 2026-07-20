@@ -89,7 +89,7 @@
   % message-passing slide
   vec/.style={draw=VUgrey!70, fill=#1, minimum width=3.6mm, minimum height=2.4mm,
               inner sep=0pt, anchor=south},
-  slbl/.style={font=\fontsize{6.4}{7.6}\selectfont, text=VUgrey},
+  slbl/.style={font=\scriptsize, text=VUgrey},
   stepbox/.style={rectangle, rounded corners=2pt, draw=VUgoldDark, fill=VUgold!16,
                   inner sep=3pt, font=\small},
 }
@@ -168,9 +168,9 @@
 
 \begin{frame}{Message Passing: Message $\to$ Aggregate $\to$ Update}
   \centering
-  \begin{tikzpicture}[scale=0.92, transform shape]
+  \begin{tikzpicture}[scale=0.9, transform shape]
     % ================= (a) an irregular graph =================
-    \node[slbl, anchor=south] at (1.4,2.25) {\textbf{target node $v$ in its neighbourhood}};
+    \node[font=\small, text=VUgrey, anchor=south] at (1.4,2.25) {\textbf{target node $v$ in its neighbourhood}};
     % neighbours of v, scattered at uneven angles/distances
     \node[gnode, fill=aggcol!30, minimum size=6mm] (u1) at (0.15,1.35) {$u_1$};
     \node[gnode, fill=aggcol!30, minimum size=6mm] (u2) at (-0.35,-0.25) {$u_2$};
@@ -196,30 +196,28 @@
       \node[font=\scriptsize, text=VUgoldDark, anchor=south west] at (1.0,0.9) {$e_{u_1 v}$};
       \node[stepbox, anchor=west] at (3.4,1.6)
         {$m_{uv} = \phi\big(h_u^{(\ell)},\, \textcolor{VUgoldDark}{e_{uv}}\big)$};
-      \node[slbl, anchor=north west, text width=3.4cm] at (3.4,1.1)
-        {\textcolor{VUgoldDark}{\textbf{1. Message:}} each neighbour sends its
-         features, mixed with \textcolor{VUgoldDark}{edge feature} $e_{uv}$.};
+      \node[slbl, anchor=north west, text width=4.4cm] at (3.4,1.15)
+        {\textcolor{VUgoldDark}{\textbf{1. Message:}} each neighbour's features
+         $+$ its \textcolor{VUgoldDark}{edge feature} $e_{uv}$};
     }
     % ================= (c) aggregate =================
     \visible<3->{
-      \node[stepbox, anchor=west, draw=aggcol, fill=aggcol!12] at (3.4,-0.3)
+      \node[stepbox, anchor=west, draw=aggcol, fill=aggcol!12] at (3.4,-0.2)
         {$\aggr{z_v = \textstyle\sum_{u\in\mathcal{N}(v)} m_{uv}}$};
-      \node[slbl, anchor=north west, text width=3.4cm] at (3.4,-0.8)
-        {\textbf{\aggr{2. Aggregate:}} a permutation-invariant sum over
-         neighbours.};
+      \node[slbl, anchor=north west, text width=4.4cm] at (3.4,-0.65)
+        {\textbf{\aggr{2. Aggregate:}} an order-invariant sum over neighbours};
     }
     % ================= (d) update / combine =================
     \visible<4->{
-      \node[stepbox, anchor=west, draw=combcol, fill=combcol!12] at (3.4,-2.2)
+      \node[stepbox, anchor=west, draw=combcol, fill=combcol!12] at (3.4,-1.85)
         {$\comb{h_v^{(\ell+1)} = \sigma\big(W z_v + b\big)}$};
-      \node[slbl, anchor=north west, text width=3.4cm] at (3.4,-2.7)
-        {\textbf{\comb{3. Update}} (a.k.a.\ combine): a learned map, then
-         ReLU.};
+      \node[slbl, anchor=north west, text width=4.4cm] at (3.4,-2.3)
+        {\textbf{\comb{3. Update}} (combine): a learned map, then ReLU};
     }
 
     % ================= (e) vectors on the right =================
     \visible<2->{
-      \node[slbl, anchor=south] at (9.9,2.3) {\textbf{what node $v$ holds}};
+      \node[font=\small, text=VUgrey, anchor=south] at (9.9,2.3) {\textbf{what node $v$ holds}};
       \foreach \x/\lab in {8.4/$m_{u_1v}$, 9.1/$m_{u_2v}$, 9.8/$m_{u_3v}$}{
         \foreach \i in {0,...,3} {\node[vec=VUgold!45] at (\x, 0.6+\i*0.24) {};}
         \node[font=\scriptsize, text=VUgrey, anchor=north] at (\x+0.09,0.5) {\lab};}
@@ -233,7 +231,7 @@
       \node[font=\large, text=combcol] at (10.45,-1.15) {$\Downarrow$};
       \foreach \i in {0,...,3} {\node[vec=combcol!40] at (11.0, -1.55+\i*0.24) {};}
       \node[font=\scriptsize, text=VUgrey, anchor=north] at (11.14,-1.62) {$h_v^{(\ell+1)}$};
-      \node[slbl, anchor=east, text width=2.5cm, align=right] at (10.2,-1.15)
+      \node[font=\small, text=VUgrey, anchor=east, text width=2.9cm, align=right] at (10.2,-1.15)
         {every node updates \textbf{in parallel}};
     }
     % ================= (f) next layer =================
@@ -244,11 +242,12 @@
       \node[font=\scriptsize, text=unsafered, anchor=east] at (-1.9,1.35) {layer 2};
     }
   \end{tikzpicture}
-
-  \visible<5->{\vskip-0.2ex
+  \vfill
+  \visible<5->{%
   {\footnotesize After $K$ layers $h_v$ summarises $v$'s \key{$K$-hop
   neighbourhood}, which is also how far a \bad{perturbation} can travel.\par}}
-  \refline{Gilmer et al., ICML 2017;\ \ Xu et al., ICLR 2019.}
+  \vskip0.5ex
+  {\centering\tiny\color{VUgrey!75} Gilmer et al., ICML 2017;\ \ Xu et al., ICLR 2019.\par}
 \end{frame}
 
 {\setbeamerfont{frametitle}{size=\footnotesize,series=\bfseries}
@@ -393,7 +392,7 @@
         \fill[VUgold!25] (0,1.35)--(1.284,0.418)--(0.794,-1.093)--(-0.794,-1.093)--(-1.284,0.418)--cycle;
         \draw[VUblack, thick] (0,1.35)--(1.284,0.418)--(0.794,-1.093)--(-0.794,-1.093)--(-1.284,0.418)--cycle;
         \draw[->,VUgoldDark,thick] (0,0)--(0.95,-0.18) node[font=\tiny, right]{$b_1$};
-        \draw[->,VUgoldDark,thick] (0,0)--(-0.4,0.9) node[font=\tiny, above]{$b_2$};
+        \draw[->,VUgoldDark,thick] (0,0)--(-0.28,0.66) node[font=\tiny, left, inner sep=1.5pt]{$b_2$};
         \fill[VUblack] (0,0) circle (1.8pt) node[anchor=north east, font=\scriptsize]{$c$};
       \end{tikzpicture}\hspace{1ex}%
       \begin{tikzpicture}[scale=0.68]
